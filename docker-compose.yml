@@ -1,0 +1,14 @@
+services:
+  config-server:
+    container_name: config-server
+    image: redis:7
+    env_file:
+      - ./vars.env
+
+  discovery-service:
+    container_name: discovery-service
+    image: mrshoffen/task-tracker-config-server:latest
+    env_file:
+      - ./vars.env
+    depends_on:
+      - config-server
