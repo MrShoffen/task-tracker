@@ -2,12 +2,16 @@ services:
   config-server:
     container_name: config-server
     image: redis:7
+    ports:
+      - "8012:8012"
     env_file:
       - ./vars.env
 
   discovery-service:
     container_name: discovery-service
     image: mrshoffen/task-tracker-config-server:latest
+    ports:
+      - "8015:8015"
     env_file:
       - ./vars.env
     depends_on:
