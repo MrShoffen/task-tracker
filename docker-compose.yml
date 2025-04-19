@@ -1,7 +1,7 @@
 services:
   config-server:
     container_name: config-server
-    image: redis:7
+    image: mrshoffen/task-tracker-config-server:latest
     ports:
       - "8012:8012"
     env_file:
@@ -9,7 +9,7 @@ services:
 
   discovery-service:
     container_name: discovery-service
-    image: mrshoffen/task-tracker-config-server:latest
+    image: mrshoffen/task-tracker-discovery-service:latest
     ports:
       - "8015:8015"
     env_file:
