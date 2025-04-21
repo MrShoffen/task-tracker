@@ -2,7 +2,6 @@ services:
   config-server:
     container_name: config-server
     image: mrshoffen/task-tracker-config-server:latest
-    command: sh -c "apt-get update && apt-get install -y curl"
     ports:
       - "8012:8012"
     env_file:
@@ -18,7 +17,6 @@ services:
   discovery-service:
     container_name: discovery-service
     image: mrshoffen/task-tracker-discovery-service:latest
-    command: sh -c "apt-get update && apt-get install -y curl"
     ports:
       - "8015:8015"
     env_file:
@@ -37,7 +35,6 @@ services:
   api-gateway:
     container_name: api-gateway
     image: mrshoffen/task-tracker-api-gateway:latest
-    command: sh -c "apt-get update && apt-get install -y curl"
     ports:
       - "8080:8080"
     env_file:
