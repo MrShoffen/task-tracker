@@ -6,6 +6,13 @@ services:
       - "8012:8012"
     env_file:
       - ./vars.env
+#    TODO add healthcheck
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8012/actuator/health/readiness"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 10s
 
   discovery-service:
     container_name: discovery-service
@@ -14,5 +21,30 @@ services:
       - "8015:8015"
     env_file:
       - ./vars.env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8015/actuator/health/readiness" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 10s
     depends_on:
-      - config-server
+      config-server:
+        condition: service_healthy
+
+
+  api-gateway:
+    container_name: api-gateway
+    image: mrshoffen/task-tracker-api-gateway:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./vars.env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8015/actuator/health/readiness" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 10s
+    depends_on:
+      discovery-service:
+        condition: service_healthy
