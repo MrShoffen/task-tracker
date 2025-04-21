@@ -12,7 +12,7 @@ services:
       interval: 5s
       timeout: 2s
       retries: 10
-      start_period: 10s
+      start_period: 5s
 
   discovery-service:
     container_name: discovery-service
@@ -26,7 +26,7 @@ services:
       interval: 5s
       timeout: 2s
       retries: 10
-      start_period: 10s
+      start_period: 5s
     depends_on:
       config-server:
         condition: service_healthy
@@ -44,7 +44,7 @@ services:
       interval: 5s
       timeout: 2s
       retries: 10
-      start_period: 10s
+      start_period: 5s
     depends_on:
       discovery-service:
         condition: service_healthy
