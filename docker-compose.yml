@@ -40,7 +40,7 @@ services:
     env_file:
       - ./vars.env
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8015/actuator/health/readiness" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
       interval: 5s
       timeout: 2s
       retries: 10
