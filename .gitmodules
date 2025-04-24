@@ -10,3 +10,6 @@
 [submodule "task-tracker-discovery-service"]
 	path = task-tracker-discovery-service
 	url = https://github.com/MrShoffen/task-tracker-discovery-service.git
+[submodule "task-tracker-api-gateway"]
+	path = task-tracker-api-gateway
+	url = https://github.com/MrShoffen/task-tracker-api-gateway.git
