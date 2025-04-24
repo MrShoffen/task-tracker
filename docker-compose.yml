@@ -8,7 +8,7 @@ services:
       - ./vars.env
     #    TODO add healthcheck
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8012/actuator/health/readiness"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8012/actuator/health/readiness" ]
       interval: 5s
       timeout: 2s
       retries: 10
@@ -46,6 +46,7 @@ services:
       discovery-service:
         condition: service_healthy
       postgres:
+        condition: service_started
 
   authentication-service:
     container_name: authentication-service
@@ -56,6 +57,7 @@ services:
       discovery-service:
         condition: service_healthy
       postgres:
+        condition: service_started
 
   api-gateway:
     container_name: api-gateway
