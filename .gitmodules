@@ -1,0 +1,3 @@
+[submodule "task-tracker-dependencies-versions"]
+	path = task-tracker-dependencies-versions
+	url = https://github.com/MrShoffen/task-tracker-dependencies-versions.git
