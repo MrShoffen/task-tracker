@@ -54,5 +54,5 @@ jobs:
           
           # Коммитим изменения
           git add .gitmodules $SUBMODULE_PATH
-          git commit -m "Update submodule $SUBMODULE_PATH to release $VERSION"
-          git push origin master
+          git commit -m "Update submodule $SUBMODULE_PATH to $VERSION"
+          git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:main
