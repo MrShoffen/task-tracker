@@ -61,7 +61,7 @@ jobs:
 
           # Коммитим только если есть изменения
           if ! git diff --cached --quiet; then
-            git commit -m "Update submodule to $VERSION"
+            git commit -m "Update submodule $SUBMODULE_PATH to $VERSION"
             git push origin master
           else
             echo "No changes to commit"
