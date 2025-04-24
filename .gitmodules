@@ -4,3 +4,6 @@
 [submodule "task-tracker-commons"]
 	path = task-tracker-commons
 	url = https://github.com/MrShoffen/task-tracker-commons.git
+[submodule "task-tracker-config-server"]
+	path = task-tracker-config-server
+	url = https://github.com/MrShoffen/task-tracker-config-server.git
