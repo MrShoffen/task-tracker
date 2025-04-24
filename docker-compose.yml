@@ -6,7 +6,7 @@ services:
       - "8012:8012"
     env_file:
       - ./vars.env
-#    TODO add healthcheck
+    #    TODO add healthcheck
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8012/actuator/health/readiness"]
       interval: 5s
