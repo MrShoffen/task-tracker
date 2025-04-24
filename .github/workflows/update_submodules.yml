@@ -2,16 +2,57 @@ name: Update submodules after release
 
 on:
   repository_dispatch:
-    types: [update_submodule]
+    types: [ update_submodule ]
 
 
 jobs:
-  create-release:
+  update-submodules:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug payload
+      - name: Checkout main repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+
+      - name: Setup Git identity
         run: |
-          echo "Version: ${{ github.event.client_payload.version }}"
-          echo "Commit Hash: ${{ github.event.client_payload.commit_hash }}"
-          echo "Author: ${{ github.event.client_payload.custom_data.author }}"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Extract repo name for submodule path
+        id: extract-repo-name
+        run: |
+          REPO_NAME=$(echo "${{ github.event.client_payload.source_repo }}" | cut -d'/' -f2)
+          echo "submodule_path=$REPO_NAME" >> $GITHUB_OUTPUT
+          echo "Will use submodule path: $REPO_NAME"
+
+      - name: Add or update submodule
+        run: |
+          SOURCE_REPO="https://github.com/${{ github.event.client_payload.source_repo }}.git"
+          VERSION="${{ github.event.client_payload.version }}"
+          SUBMODULE_PATH="${{ steps.extract-repo-name.outputs.submodule_path }}"
+          
+          echo "Using submodule path: $SUBMODULE_PATH"
+          
+          # Проверяем существование submodule
+          if [ -f .gitmodules ] && grep -q "\[submodule \"$SUBMODULE_PATH\"\]" .gitmodules; then
+            echo "Submodule exists, updating..."
+            git submodule update --init --remote $SUBMODULE_PATH
+            cd $SUBMODULE_PATH
+            git fetch --tags
+            git checkout $VERSION
+            cd ..
+          else
+            echo "Adding new submodule..."
+            git submodule add $SOURCE_REPO $SUBMODULE_PATH
+            cd $SUBMODULE_PATH
+            git checkout $VERSION
+            cd ..
+          fi
+          
+          # Коммитим изменения
+          git add .gitmodules $SUBMODULE_PATH
+          git commit -m "Update submodule $SUBMODULE_PATH to release $VERSION"
+          git push origin master
