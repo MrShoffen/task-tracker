@@ -1,0 +1,17 @@
+name: Update submodules after release
+
+on:
+  repository_dispatch:
+    types: [update_submodule]
+
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Debug payload
+        run: |
+          echo "Version: ${{ github.event.client_payload.version }}"
+          echo "Commit Hash: ${{ github.event.client_payload.commit_hash }}"
+          echo "Author: ${{ github.event.client_payload.custom_data.author }}"
