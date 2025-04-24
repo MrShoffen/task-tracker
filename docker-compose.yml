@@ -31,6 +31,31 @@ services:
       config-server:
         condition: service_healthy
 
+  postgres:
+    container_name: postgres_task
+    image: postgres:17
+    env_file:
+      - ./vars.env
+
+  user-profile-ws:
+    container_name: user-profile-ws
+    image: mrshoffen/task-tracker-user-profile:latest
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+
+  authentication-service:
+    container_name: authentication-service
+    image: mrshoffen/task-tracker-authentication-service:latest
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
 
   api-gateway:
     container_name: api-gateway
