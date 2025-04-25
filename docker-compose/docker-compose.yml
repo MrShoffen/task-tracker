@@ -56,7 +56,7 @@ services:
     container_name: authentication-service
     image: mrshoffen/task-tracker-authentication-service:latest
     networks:
-      -task-tracker-net
+      - task-tracker-net
     env_file:
       - ./vars.env
     depends_on:
