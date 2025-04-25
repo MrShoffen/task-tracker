@@ -1,6 +1,10 @@
+
 networks:
   task-tracker-net:
     driver: bridge
+
+include:
+  - docker-compose-db.yml
 
 services:
   config-server:
@@ -86,18 +90,3 @@ services:
       redis:
         condition: service_started
 
-  postgres:
-    container_name: postgres_task
-    image: postgres:17
-    networks:
-      - task-tracker-net
-    env_file:
-      - ./vars.env
-
-  redis:
-    container_name: redis_task
-    image: redis:7.4
-    networks:
-      - task-tracker-net
-    env_file:
-      - ./vars.env
