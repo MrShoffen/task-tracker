@@ -7,7 +7,7 @@ services:
     container_name: postgres_task
     image: postgres:17
     networks:
-      -task-tracker-net
+      - task-tracker-net
     env_file:
       - ./vars.env
 
@@ -15,6 +15,6 @@ services:
     container_name: redis_task
     image: redis:7.4
     networks:
-      -task-tracker-net
+      - task-tracker-net
     env_file:
       - ./vars.env

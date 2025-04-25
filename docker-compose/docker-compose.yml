@@ -7,7 +7,7 @@ services:
     container_name: config-server
     image: mrshoffen/task-tracker-config-server:latest
     networks:
-      -task-tracker-net
+      - task-tracker-net
     ports:
       - "8012:8012"
     env_file:
@@ -24,7 +24,7 @@ services:
     container_name: discovery-service
     image: mrshoffen/task-tracker-discovery-service:latest
     networks:
-      -task-tracker-net
+      - task-tracker-net
     ports:
       - "8015:8015"
     env_file:
@@ -43,7 +43,7 @@ services:
     container_name: user-profile-ws
     image: mrshoffen/task-tracker-user-profile:latest
     networks:
-      -task-tracker-net
+      - task-tracker-net
     env_file:
       - ./vars.env
     depends_on:
@@ -69,7 +69,7 @@ services:
     container_name: api-gateway
     image: mrshoffen/task-tracker-api-gateway:latest
     networks:
-      -task-tracker-net
+      - task-tracker-net
     ports:
       - "8080:8080"
     env_file:
