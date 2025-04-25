@@ -1,7 +1,13 @@
+networks:
+  task-tracker-net:
+    driver: bridge
+
 services:
   config-server:
     container_name: config-server
     image: mrshoffen/task-tracker-config-server:latest
+    networks:
+      -task-tracker-net
     ports:
       - "8012:8012"
     env_file:
@@ -17,6 +23,8 @@ services:
   discovery-service:
     container_name: discovery-service
     image: mrshoffen/task-tracker-discovery-service:latest
+    networks:
+      -task-tracker-net
     ports:
       - "8015:8015"
     env_file:
@@ -31,15 +39,11 @@ services:
       config-server:
         condition: service_healthy
 
-  postgres:
-    container_name: postgres_task
-    image: postgres:17
-    env_file:
-      - ./vars.env
-
   user-profile-ws:
     container_name: user-profile-ws
     image: mrshoffen/task-tracker-user-profile:latest
+    networks:
+      -task-tracker-net
     env_file:
       - ./vars.env
     depends_on:
@@ -51,6 +55,8 @@ services:
   authentication-service:
     container_name: authentication-service
     image: mrshoffen/task-tracker-authentication-service:latest
+    networks:
+      -task-tracker-net
     env_file:
       - ./vars.env
     depends_on:
@@ -62,6 +68,8 @@ services:
   api-gateway:
     container_name: api-gateway
     image: mrshoffen/task-tracker-api-gateway:latest
+    networks:
+      -task-tracker-net
     ports:
       - "8080:8080"
     env_file:
@@ -75,3 +83,5 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
+      redis:
+        condition: service_started
