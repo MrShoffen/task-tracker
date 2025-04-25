@@ -2,18 +2,19 @@ networks:
   task-tracker-net:
     external: true
 
-postgres:
-  container_name: postgres_task
-  image: postgres:17
-  networks:
-    -task-tracker-net
-  env_file:
-    - ./vars.env
+services:
+  postgres:
+    container_name: postgres_task
+    image: postgres:17
+    networks:
+      -task-tracker-net
+    env_file:
+      - ./vars.env
 
-redis:
-  container_name: redis_task
-  image: redis:7.4
-  networks:
-    -task-tracker-net
-  env_file:
-    - ./vars.env
+  redis:
+    container_name: redis_task
+    image: redis:7.4
+    networks:
+      -task-tracker-net
+    env_file:
+      - ./vars.env
