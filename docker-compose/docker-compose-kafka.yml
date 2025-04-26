@@ -7,14 +7,11 @@ services:
     ports:
       - "8081:8080"
     environment:
-      ./kafka.env
+      - ./kafka.env
     depends_on:
       - broker-1  # Зависит от ваших брокеров (указанных в docker-compose-kafka.yml)
       - broker-2
       - broker-3
-
-
-
 
   controller-1:
     image: apache/kafka:latest
