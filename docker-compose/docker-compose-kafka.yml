@@ -22,7 +22,7 @@ services:
 
   controller-1:
     image: apache/kafka:latest
-    container_name: controller-1
+    container_name: controller-1-task
     networks:
       - task-tracker-net
     environment:
@@ -36,7 +36,7 @@ services:
 
   controller-2:
     image: apache/kafka:latest
-    container_name: controller-2
+    container_name: controller-2-task
     networks:
       - task-tracker-net
     environment:
@@ -50,7 +50,7 @@ services:
 
   controller-3:
     image: apache/kafka:latest
-    container_name: controller-3
+    container_name: controller-3-task
     networks:
       - task-tracker-net
     environment:
@@ -64,7 +64,7 @@ services:
 
   broker-1:
     image: apache/kafka:latest
-    container_name: broker-1
+    container_name: broker-1-task
     networks:
       - task-tracker-net
     environment:
@@ -84,7 +84,7 @@ services:
 
   broker-2:
     image: apache/kafka:latest
-    container_name: broker-2
+    container_name: broker-2-task
     networks:
       - task-tracker-net
     environment:
@@ -104,7 +104,7 @@ services:
 
   broker-3:
     image: apache/kafka:latest
-    container_name: broker-3
+    container_name: broker-3-task
     networks:
       - task-tracker-net
     environment:
