@@ -6,7 +6,7 @@ services:
       - task-tracker-net
     ports:
       - "8081:8080"
-    environment:
+    env_file:
       - ./kafka.env
     depends_on:
       - broker-1
