@@ -9,7 +9,7 @@ services:
     environment:
       - ./kafka.env
     depends_on:
-      - broker-1  # Зависит от ваших брокеров (указанных в docker-compose-kafka.yml)
+      - broker-1
       - broker-2
       - broker-3
     healthcheck:
