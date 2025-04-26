@@ -6,8 +6,12 @@ services:
       - task-tracker-net
     ports:
       - "8081:8080"
+    environment:
+      - SPRING_SECURITY_USER_NAME=${KAFKA_UI_USER_NAME}
+      - SPRING_SECURITY_USER_PASSWORD=${KAFKA_UI_PASSWORD}
+
     env_file:
-      - ./kafka.env
+      - ./vars.env
     depends_on:
       - broker-1
       - broker-2
