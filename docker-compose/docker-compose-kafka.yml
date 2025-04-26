@@ -12,6 +12,11 @@ services:
       - broker-1  # Зависит от ваших брокеров (указанных в docker-compose-kafka.yml)
       - broker-2
       - broker-3
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   controller-1:
     image: apache/kafka:latest
