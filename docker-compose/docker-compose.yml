@@ -55,6 +55,23 @@ services:
         condition: service_healthy
       postgres:
         condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  user-settings-ws:
+    container_name: user-settings-ws
+    image: mrshoffen/task-tracker-user-settings
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
 
   authentication-service:
     container_name: authentication-service
@@ -67,6 +84,38 @@ services:
       discovery-service:
         condition: service_healthy
       postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  mail-service:
+    container_name: mail-service
+    image: mrshoffen/task-tracker-mail-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  scheduler:
+    container_name: scheduler
+    image: mrshoffen/task-tracker-scheduler:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
         condition: service_started
 
   api-gateway:
@@ -85,8 +134,6 @@ services:
       retries: 10
       start_period: 5s
     depends_on:
-      discovery-service:
-        condition: service_healthy
-      redis:
-        condition: service_started
-
+      - user-profile-ws
+      - user-settings-ws
+      - authentication-service
