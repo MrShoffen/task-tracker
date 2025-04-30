@@ -25,3 +25,6 @@
 [submodule "task-tracker-mail-service"]
 	path = task-tracker-mail-service
 	url = https://github.com/MrShoffen/task-tracker-mail-service.git
+[submodule "task-tracker-scheduler"]
+	path = task-tracker-scheduler
+	url = https://github.com/MrShoffen/task-tracker-scheduler.git
