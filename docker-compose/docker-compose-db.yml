@@ -2,6 +2,8 @@ services:
   postgres:
     container_name: postgres_task
     image: postgres:17
+    ports:
+      - "3535:5432"
     networks:
       - task-tracker-net
     env_file:
