@@ -22,3 +22,6 @@
 [submodule "task-tracker-user-settings"]
 	path = task-tracker-user-settings
 	url = https://github.com/MrShoffen/task-tracker-user-settings.git
+[submodule "task-tracker-mail-service"]
+	path = task-tracker-mail-service
+	url = https://github.com/MrShoffen/task-tracker-mail-service.git
