@@ -31,3 +31,6 @@
 [submodule "task-tracker-workspace-manager"]
 	path = task-tracker-workspace-manager
 	url = https://github.com/MrShoffen/task-tracker-workspace-manager.git
+[submodule "task-tracker-desk-manager"]
+	path = task-tracker-desk-manager
+	url = https://github.com/MrShoffen/task-tracker-desk-manager.git
