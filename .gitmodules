@@ -40,3 +40,6 @@
 [submodule "task-tracker-aggregator-service"]
 	path = task-tracker-aggregator-service
 	url = https://github.com/MrShoffen/task-tracker-aggregator-service.git
+[submodule "task-tracker-user-permission-service"]
+	path = task-tracker-user-permission-service
+	url = https://github.com/MrShoffen/task-tracker-user-permission-service.git
