@@ -43,3 +43,6 @@
 [submodule "task-tracker-user-permission-service"]
 	path = task-tracker-user-permission-service
 	url = https://github.com/MrShoffen/task-tracker-user-permission-service.git
+[submodule "task-tracker-comments"]
+	path = task-tracker-comments
+	url = https://github.com/MrShoffen/task-tracker-comments.git
