@@ -209,5 +209,4 @@ services:
       start_period: 5s
     depends_on:
       - user-profile-ws
-      - user-settings-ws
       - authentication-service
