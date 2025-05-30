@@ -302,4 +302,6 @@ services:
       start_period: 5s
     depends_on:
       - user-profile-ws
-      - authentication-service
+      - authentication-service-1
+      - authentication-service-2
+      - authentication-service-3
