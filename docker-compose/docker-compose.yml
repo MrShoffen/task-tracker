@@ -103,8 +103,8 @@ services:
       kafka-ui:
         condition: service_started
 
-  desk-manager-rs:
-    container_name: desk-manager-rs
+  desk-manager-rs-1:
+    container_name: desk-manager-rs-1
     image: mrshoffen/task-tracker-desk-manager:latest
     networks:
       - task-tracker-net
@@ -113,13 +113,43 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-desk:
         condition: service_started
       kafka-ui:
         condition: service_started
 
-  task-manager-rs:
-    container_name: task-manager-rs
+  desk-manager-rs-2:
+    container_name: desk-manager-rs-2
+    image: mrshoffen/task-tracker-desk-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-desk:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  desk-manager-rs-3:
+    container_name: desk-manager-rs-3
+    image: mrshoffen/task-tracker-desk-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-desk:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-manager-rs-1:
+    container_name: task-manager-rs-1
     image: mrshoffen/task-tracker-task-manager:latest
     networks:
       - task-tracker-net
@@ -128,7 +158,37 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-task:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-manager-rs-2:
+    container_name: task-manager-rs-2
+    image: mrshoffen/task-tracker-task-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-task:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-manager-rs-3:
+    container_name: task-manager-rs-3
+    image: mrshoffen/task-tracker-task-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-task:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -158,7 +218,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-permission:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -173,7 +233,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-permission:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -188,7 +248,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-permission:
         condition: service_started
       kafka-ui:
         condition: service_started

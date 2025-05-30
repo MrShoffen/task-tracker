@@ -22,6 +22,35 @@ services:
     environment:
       POSTGRES_DB: workspace_db
 
+  postgres-desk:
+    container_name: postgres_desk
+    image: postgres:17
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    environment:
+      POSTGRES_DB: desk_db
+
+  postgres-task:
+    container_name: postgres_task
+    image: postgres:17
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    environment:
+      POSTGRES_DB: task_db
+
+  postgres-permission:
+    container_name: postgres_permission
+    image: postgres:17
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    environment:
+      POSTGRES_DB: permission_db
 
   redis:
     container_name: redis_task
