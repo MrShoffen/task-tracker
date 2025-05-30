@@ -179,8 +179,38 @@ services:
       kafka-ui:
         condition: service_started
 
-  authentication-service:
-    container_name: authentication-service
+  authentication-service-1:
+    container_name: authentication-service-1
+    image: mrshoffen/task-tracker-authentication-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  authentication-service-2:
+    container_name: authentication-service-2
+    image: mrshoffen/task-tracker-authentication-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  authentication-service-3:
+    container_name: authentication-service-3
     image: mrshoffen/task-tracker-authentication-service:latest
     networks:
       - task-tracker-net
@@ -209,8 +239,8 @@ services:
       kafka-ui:
         condition: service_started
 
-  scheduler:
-    container_name: scheduler
+  scheduler-1:
+    container_name: scheduler-1
     image: mrshoffen/task-tracker-scheduler:latest
     networks:
       - task-tracker-net
@@ -223,6 +253,37 @@ services:
         condition: service_started
       kafka-ui:
         condition: service_started
+
+  scheduler-2:
+    container_name: scheduler-2
+    image: mrshoffen/task-tracker-scheduler:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  scheduler-3:
+    container_name: scheduler-3
+    image: mrshoffen/task-tracker-scheduler:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
 
   api-gateway:
     container_name: api-gateway
