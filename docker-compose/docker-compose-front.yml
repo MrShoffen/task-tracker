@@ -1,0 +1,9 @@
+task-frontend-service:
+  container_name: task-sticker-rs
+  image: mrshoffen/task-tracker-frontend:latest
+  ports:
+    - "80:80"
+  networks:
+    - task-tracker-net
+  env_file:
+    - ./vars.env
