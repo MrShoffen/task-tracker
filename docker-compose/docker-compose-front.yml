@@ -1,5 +1,5 @@
 task-frontend-service:
-  container_name: task-sticker-rs
+  container_name: task-frontend
   image: mrshoffen/task-tracker-frontend:latest
   ports:
     - "80:80"

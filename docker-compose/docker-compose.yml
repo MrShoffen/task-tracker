@@ -164,7 +164,7 @@ services:
         condition: service_started
 
   task-realtime-service:
-    container_name: task-sticker-rs
+    container_name: task-realtime-service
     image: mrshoffen/task-tracker-realtime-service:latest
     networks:
       - task-tracker-net
