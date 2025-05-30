@@ -5,6 +5,7 @@ networks:
 include:
   - docker-compose-db.yml
   - docker-compose-kafka.yml
+  - docker-compose-front.yml
 
 services:
   config-server:
