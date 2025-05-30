@@ -58,8 +58,38 @@ services:
       kafka-ui:
         condition: service_started
 
-  workspace-manager-rs:
-    container_name: workspace-manager-rs
+  workspace-manager-rs-1:
+    container_name: workspace-manager-rs-1
+    image: mrshoffen/task-tracker-workspace-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  workspace-manager-rs-2:
+    container_name: workspace-manager-rs-2
+    image: mrshoffen/task-tracker-workspace-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  workspace-manager-rs-3:
+    container_name: workspace-manager-rs-3
     image: mrshoffen/task-tracker-workspace-manager:latest
     networks:
       - task-tracker-net
@@ -118,8 +148,38 @@ services:
       kafka-ui:
         condition: service_started
 
-  user-permission-rs:
-    container_name: user-permission-rs
+  user-permission-rs-1:
+    container_name: user-permission-rs-1
+    image: mrshoffen/task-tracker-user-permission-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  user-permission-rs-2:
+    container_name: user-permission-rs-2
+    image: mrshoffen/task-tracker-user-permission-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  user-permission-rs-3:
+    container_name: user-permission-rs-3
     image: mrshoffen/task-tracker-user-permission-service:latest
     networks:
       - task-tracker-net
