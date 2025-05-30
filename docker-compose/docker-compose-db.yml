@@ -8,12 +8,12 @@ services:
       - task-tracker-net
     env_file:
       - ./vars.env
-  environment:
-    POSTGRES_SHARED_BUFFERS=4GB
-    POSTGRES_MAX_CONNECTIONS=200
-    POSTGRES_MAINTENANCE_WORK_MEM=1GB
-    POSTGRES_EFFECTIVE_CACHE_SIZE=8GB
-    POSTGRES_WORK_MEM=160MB
+    environment:
+      POSTGRES_SHARED_BUFFERS: 4GB
+      POSTGRES_MAX_CONNECTIONS: 200
+      POSTGRES_MAINTENANCE_WORK_MEM: 1GB
+      POSTGRES_EFFECTIVE_CACHE_SIZE: 8GB
+      POSTGRES_WORK_MEM: 160MB
 
   redis:
     container_name: redis_task
