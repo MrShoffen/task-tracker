@@ -68,7 +68,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-workspace:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -83,7 +83,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-workspace:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -98,7 +98,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-workspace:
         condition: service_started
       kafka-ui:
         condition: service_started
