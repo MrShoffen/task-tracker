@@ -46,3 +46,6 @@
 [submodule "task-tracker-comments"]
 	path = task-tracker-comments
 	url = https://github.com/MrShoffen/task-tracker-comments.git
+[submodule "task-tracker-sticker-service"]
+	path = task-tracker-sticker-service
+	url = https://github.com/MrShoffen/task-tracker-sticker-service.git
