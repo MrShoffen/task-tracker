@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 5s # Set the scrape interval to every 5 seconds.
+  evaluation_interval: 5s # Evaluate rules every 5 seconds.
+
+scrape_configs:
+  - job_name: 'api-gateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'api-gateway:8080'
+
+  - job_name: 'workspace-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'workspace-manager-rs-1:8080'
+          - 'workspace-manager-rs-2:8080'
+          - 'workspace-manager-rs-3:8080'
