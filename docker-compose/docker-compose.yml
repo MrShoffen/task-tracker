@@ -527,13 +527,28 @@ services:
         condition: service_started
 
 
-  api-gateway:
-    container_name: api-gateway
+  load-balancer:
+    image: nginx:latest
+    container_name: load-balancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx-cache:/var/cache/nginx
+    networks:
+      - task-tracker-net
+    depends_on:
+      - api-gateway-1
+      - api-gateway-2
+      - api-gateway-3
+
+  api-gateway-1:
+    container_name: api-gateway-1
     image: mrshoffen/task-tracker-api-gateway:latest
     networks:
       - task-tracker-net
-    ports:
-      - "8080:8080"
+#    ports:
+#      - "8080:8080"
     env_file:
       - ./vars.env
     healthcheck:
@@ -542,3 +557,37 @@ services:
       timeout: 2s
       retries: 10
       start_period: 5s
+
+  api-gateway-2:
+    container_name: api-gateway-2
+    image: mrshoffen/task-tracker-api-gateway:latest
+    networks:
+      - task-tracker-net
+    #    ports:
+    #      - "8080:8080"
+    env_file:
+      - ./vars.env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
+
+
+  api-gateway-3:
+    container_name: api-gateway-3
+    image: mrshoffen/task-tracker-api-gateway:latest
+    networks:
+      - task-tracker-net
+    #    ports:
+    #      - "8080:8080"
+    env_file:
+      - ./vars.env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
+
