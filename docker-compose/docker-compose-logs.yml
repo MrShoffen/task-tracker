@@ -95,7 +95,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     healthcheck:
       test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
       interval: 10s
@@ -107,7 +107,7 @@ services:
   backend:
     image: grafana/loki:3.1.2
     volumes:
-      - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
+      - ./observability/loki/loki-config.yaml:/etc/loki/config.yaml
     ports:
       - "3100"
       - "7946"
