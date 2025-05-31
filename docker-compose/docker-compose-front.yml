@@ -4,7 +4,9 @@ services:
     image: mrshoffen/task-tracker-frontend:latest
     ports:
       - "80:80"
-    networks:
-      - task-tracker-net
-    env_file:
-      - ./vars.env
+
+  image-service:
+    container_name: image
+    image: mrshoffen/image-server:latest
+    ports:
+      - "8079:8079"

@@ -415,7 +415,6 @@ services:
         condition: service_started
 
 
-
   task-realtime-service:
     container_name: task-realtime-service
     image: mrshoffen/task-tracker-realtime-service:latest
@@ -468,8 +467,21 @@ services:
       kafka-ui:
         condition: service_started
 
-  mail-service:
-    container_name: mail-service
+  mail-service-1:
+    container_name: mail-service-1
+    image: mrshoffen/task-tracker-mail-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      kafka-ui:
+        condition: service_started
+
+  mail-service-2:
+    container_name: mail-service-2
     image: mrshoffen/task-tracker-mail-service:latest
     networks:
       - task-tracker-net
@@ -526,68 +538,22 @@ services:
       kafka-ui:
         condition: service_started
 
-
-  load-balancer:
-    image: nginx:latest
-    container_name: load-balancer
+  api-gateway:
+    container_name: api-gateway
+    image: mrshoffen/task-tracker-api-gateway:latest
+    networks:
+      - task-tracker-net
     ports:
-      - "8080:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx-cache:/var/cache/nginx
-    networks:
-      - task-tracker-net
+      - "8080:8080"
+    env_file:
+      - ./vars.env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
     depends_on:
-      - api-gateway-1
-      - api-gateway-2
-      - api-gateway-3
-
-  api-gateway-1:
-    container_name: api-gateway-1
-    image: mrshoffen/task-tracker-api-gateway:latest
-    networks:
-      - task-tracker-net
-#    ports:
-#      - "8080:8080"
-    env_file:
-      - ./vars.env
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
-      interval: 5s
-      timeout: 2s
-      retries: 10
-      start_period: 5s
-
-  api-gateway-2:
-    container_name: api-gateway-2
-    image: mrshoffen/task-tracker-api-gateway:latest
-    networks:
-      - task-tracker-net
-    #    ports:
-    #      - "8080:8080"
-    env_file:
-      - ./vars.env
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
-      interval: 5s
-      timeout: 2s
-      retries: 10
-      start_period: 5s
-
-
-  api-gateway-3:
-    container_name: api-gateway-3
-    image: mrshoffen/task-tracker-api-gateway:latest
-    networks:
-      - task-tracker-net
-    #    ports:
-    #      - "8080:8080"
-    env_file:
-      - ./vars.env
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
-      interval: 5s
-      timeout: 2s
-      retries: 10
-      start_period: 5s
-
+      - authentication-service-1
+      - authentication-service-2
+      - authentication-service-3

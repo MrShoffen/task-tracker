@@ -16,3 +16,83 @@ scrape_configs:
           - 'workspace-manager-rs-1:8080'
           - 'workspace-manager-rs-2:8080'
           - 'workspace-manager-rs-3:8080'
+
+  - job_name: 'user-profile-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'user-profile-ws-1:8080'
+          - 'user-profile-ws-2:8080'
+
+  - job_name: 'desk-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'desk-manager-rs-1:8080'
+          - 'desk-manager-rs-2:8080'
+          - 'desk-manager-rs-3:8080'
+
+  - job_name: 'task-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'task-manager-rs-1:8080'
+          - 'task-manager-rs-2:8080'
+          - 'task-manager-rs-3:8080'
+          - 'task-manager-rs-4:8080'
+
+  - job_name: 'aggregator-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'aggregator-rs-1:8080'
+          - 'aggregator-rs-2:8080'
+          - 'aggregator-rs-3:8080'
+
+  - job_name: 'user-permission-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'user-permission-rs-1:8080'
+          - 'user-permission-rs-2:8080'
+          - 'user-permission-rs-3:8080'
+          - 'user-permission-rs-4:8080'
+
+  - job_name: 'comments-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'task-comments-rs-1:8080'
+          - 'task-comments-rs-2:8080'
+          - 'task-comments-rs-3:8080'
+
+  - job_name: 'sticker-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'task-sticker-rs-1:8080'
+          - 'task-sticker-rs-2:8080'
+          - 'task-sticker-rs-3:8080'
+
+  - job_name: 'scheduler-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'scheduler-1:8080'
+          - 'scheduler-2:8080'
+          - 'scheduler-3:8080'
+
+  - job_name: 'mail-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'mail-service-1:8080'
+          - 'mail-service-2:8080'
+
+  - job_name: 'authentication-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'authentication-service-1:8080'
+          - 'authentication-service-2:8080'
+          - 'authentication-service-3:8080'
