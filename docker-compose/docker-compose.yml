@@ -542,8 +542,3 @@ services:
       timeout: 2s
       retries: 10
       start_period: 5s
-    depends_on:
-      - user-profile-ws
-      - authentication-service-1
-      - authentication-service-2
-      - authentication-service-3
