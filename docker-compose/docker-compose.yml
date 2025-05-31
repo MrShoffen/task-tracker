@@ -54,7 +54,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-users:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -204,8 +204,6 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
-        condition: service_started
       kafka-ui:
         condition: service_started
 
@@ -264,7 +262,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-comment:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -280,7 +278,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-sticker:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -295,8 +293,6 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
-        condition: service_started
       kafka-ui:
         condition: service_started
 
@@ -310,8 +306,6 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
-        condition: service_started
       kafka-ui:
         condition: service_started
 
@@ -325,8 +319,6 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
-        condition: service_started
       kafka-ui:
         condition: service_started
 
@@ -340,8 +332,6 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
-        condition: service_started
       kafka-ui:
         condition: service_started
 
@@ -355,8 +345,6 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
-        condition: service_started
       kafka-ui:
         condition: service_started
 
@@ -370,7 +358,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-scheduler:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -385,7 +373,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-scheduler:
         condition: service_started
       kafka-ui:
         condition: service_started
@@ -400,7 +388,7 @@ services:
     depends_on:
       discovery-service:
         condition: service_healthy
-      postgres:
+      postgres-scheduler:
         condition: service_started
       kafka-ui:
         condition: service_started
