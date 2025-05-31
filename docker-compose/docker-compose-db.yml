@@ -1,6 +1,6 @@
 services:
-  postgres:
-    container_name: postgres_task
+  postgres-scheduler:
+    container_name: postgres_scheduler
     image: postgres:17
     ports:
       - "3535:5432"
@@ -9,8 +9,7 @@ services:
     env_file:
       - ./vars.env
     environment:
-      POSTGRES_DB: task_db
-
+      POSTGRES_DB: scheduler_db
 
   postgres-workspace:
     container_name: postgres_workspace
@@ -51,6 +50,36 @@ services:
       - ./vars.env
     environment:
       POSTGRES_DB: permission_db
+
+  postgres-sticker:
+    container_name: postgres_stickers
+    image: postgres:17
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    environment:
+      POSTGRES_DB: stickers_db
+
+  postgres-users:
+    container_name: user_db
+    image: postgres:17
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    environment:
+      POSTGRES_DB: user_db
+
+  postgres-comment:
+    container_name: postgres_comments
+    image: postgres:17
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    environment:
+      POSTGRES_DB: postgres_comments
 
   redis:
     container_name: redis_task
