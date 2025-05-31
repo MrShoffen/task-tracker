@@ -44,8 +44,23 @@ services:
       config-server:
         condition: service_healthy
 
-  user-profile-ws:
-    container_name: user-profile-ws
+  user-profile-ws-1:
+    container_name: user-profile-ws-1
+    image: mrshoffen/task-tracker-user-profile:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-users:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  user-profile-ws-2:
+    container_name: user-profile-ws-2
     image: mrshoffen/task-tracker-user-profile:latest
     networks:
       - task-tracker-net
@@ -194,8 +209,49 @@ services:
       kafka-ui:
         condition: service_started
 
-  aggregator-rs:
-    container_name: aggregator-rs
+  task-manager-rs-4:
+    container_name: task-manager-rs-4
+    image: mrshoffen/task-tracker-task-manager:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-task:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  aggregator-rs-1:
+    container_name: aggregator-rs-1
+    image: mrshoffen/task-tracker-aggregator-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      kafka-ui:
+        condition: service_started
+
+  aggregator-rs-2:
+    container_name: aggregator-rs-2
+    image: mrshoffen/task-tracker-aggregator-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      kafka-ui:
+        condition: service_started
+
+  aggregator-rs-3:
+    container_name: aggregator-rs-3
     image: mrshoffen/task-tracker-aggregator-service:latest
     networks:
       - task-tracker-net
@@ -252,8 +308,53 @@ services:
       kafka-ui:
         condition: service_started
 
-  task-comments-rs:
-    container_name: task-comments-rs
+  user-permission-rs-4:
+    container_name: user-permission-rs-4
+    image: mrshoffen/task-tracker-user-permission-service:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-permission:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-comments-rs-1:
+    container_name: task-comments-rs-1
+    image: mrshoffen/task-tracker-comments:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-comment:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-comments-rs-2:
+    container_name: task-comments-rs-2
+    image: mrshoffen/task-tracker-comments:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-comment:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-comments-rs-3:
+    container_name: task-comments-rs-3
     image: mrshoffen/task-tracker-comments:latest
     networks:
       - task-tracker-net
@@ -268,8 +369,8 @@ services:
         condition: service_started
 
 
-  task-sticker-rs:
-    container_name: task-sticker-rs
+  task-sticker-rs-1:
+    container_name: task-sticker-rs-1
     image: mrshoffen/task-tracker-stickers:latest
     networks:
       - task-tracker-net
@@ -282,6 +383,38 @@ services:
         condition: service_started
       kafka-ui:
         condition: service_started
+
+  task-sticker-rs-2:
+    container_name: task-sticker-rs-2
+    image: mrshoffen/task-tracker-stickers:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-sticker:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+  task-sticker-rs-3:
+    container_name: task-sticker-rs-3
+    image: mrshoffen/task-tracker-stickers:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      postgres-sticker:
+        condition: service_started
+      kafka-ui:
+        condition: service_started
+
+
 
   task-realtime-service:
     container_name: task-realtime-service
