@@ -101,8 +101,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-      networks:
-        - task-tracker-net
+    networks:
+      - task-tracker-net
 
   backend:
     image: grafana/loki:3.1.2
