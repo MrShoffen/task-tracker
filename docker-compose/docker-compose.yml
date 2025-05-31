@@ -6,6 +6,7 @@ include:
   - docker-compose-db.yml
   - docker-compose-kafka.yml
   - docker-compose-front.yml
+  - docker-compose-logs.yml
 
 services:
   config-server:
