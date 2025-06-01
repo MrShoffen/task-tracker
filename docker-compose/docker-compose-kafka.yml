@@ -138,3 +138,15 @@ services:
       - controller-1
       - controller-2
       - controller-3
+
+  kafka-init:
+    image: confluentinc/cp-kafka:7.0.0
+    depends_on:
+      - broker-1
+      - broker-2
+      - broker-3
+    volumes:
+      - ./kafka/kafka-topic-init.sh:/scripts/kafka-topic-init.sh
+    entrypoint: [ "bash", "/scripts/kafka-topic-init.sh" ]
+    networks:
+      - task-tracker-net
