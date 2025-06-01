@@ -9,7 +9,7 @@ SEGMENT_MAX=104857600
 SEGMENT_MS=8640000
 
 KAFKA_TOPICS="/usr/bin/kafka-topics"
-COMPLETION_FILE=/kafka-init-complete
+
 
 # Создание топиков
 for topic in "${TOPICS[@]}"; do
@@ -28,6 +28,3 @@ done
 
 echo "Verification:"
 $KAFKA_TOPICS --bootstrap-server $KAFKA_BROKER --list
-
-touch $COMPLETION_FILE
-echo "Kafka topics initialized successfully"
