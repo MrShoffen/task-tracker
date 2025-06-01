@@ -83,13 +83,13 @@ services:
       - controller-1
       - controller-2
       - controller-3
-    volumes:
-      - ./kafka/kafka-topic-init.sh:/scripts/kafka-topic-init.sh
-    healthcheck:
-      test: [ "CMD", "bash", "-c", "sleep 30 && /scripts/kafka-topic-init.sh" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  volumes:
+    - ./kafka/init-kafka-topics.sh:/scripts/init-kafka-topics.sh
+  healthcheck:
+    test: [ "bash", "-c", "cub kafka-ready -b broker-1:19092 1 20 && /scripts/init-kafka-topics.sh" ]
+    interval: 10s
+    timeout: 5s
+    retries: 5
 
   broker-2:
     image: apache/kafka:latest
