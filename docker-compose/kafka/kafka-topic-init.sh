@@ -3,16 +3,15 @@
 # Настройки
 KAFKA_BROKER="broker-1:19092"
 TOPICS=("task-events" "another-topic")
-PARTITIONS=12
-REPLICATION_FACTOR=3
 RETENTION_MS=120000
+KAFKA_TOPICS="/usr/bin/kafka-topics"
 
 # Функция для создания топика
 create_topic() {
   local topic_name=$1
   echo "Creating topic: $topic_name"
 
-  kafka-topics.sh \
+   $KAFKA_TOPICS \
     --bootstrap-server $KAFKA_BROKER \
     --create \
     --topic $topic_name \
