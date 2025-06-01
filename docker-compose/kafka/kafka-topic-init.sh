@@ -2,10 +2,12 @@
 
 # Настройки
 KAFKA_BROKER="broker-1:19092"
-TOPICS=("task-events" "another-topic")
+TOPICS=("event.authentication.success" "event.comment.created" "event.comment.deleted" "event.credentials.email-update-attempt" "event.credentials.email-updated" "event.credentials.password-updated" "event.desk.created" "event.desk.deleted" "event.desk.updated" "event.registration.new" "event.registration.success" "event.sticker.created" "event.sticker.deleted" "event.task.created" "event.task.deleted" "event.task.updated" "event.workspace.created" "event.workspace.deleted" "event.workspace.updated")
 PARTITIONS=12
 REPLICATION_FACTOR=3
 RETENTION_MS=120000
+SEGMENT_MAX=104857600
+SEGMENT_MS=86400000
 
 # Полные пути к утилитам в Confluent образе
 KAFKA_TOPICS="/usr/bin/kafka-topics"
@@ -21,6 +23,8 @@ for topic in "${TOPICS[@]}"; do
     --partitions $PARTITIONS \
     --replication-factor $REPLICATION_FACTOR \
     --config retention.ms=$RETENTION_MS \
+    --config segment.bytes=$SEGMENT_MAX \
+    --config segment.ms=$SEGMENT_MS \
     --config cleanup.policy=delete
 done
 
