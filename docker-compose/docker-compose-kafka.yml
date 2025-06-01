@@ -10,7 +10,7 @@ services:
       - ./kafka.env
     depends_on:
       kafka-init:
-        condition: service_healthy
+        condition: service_completed_successfully
 
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
