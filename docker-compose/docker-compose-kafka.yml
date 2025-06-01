@@ -140,6 +140,7 @@ services:
       - controller-3
 
   kafka-init:
+    container_name: kafka-init
     image: confluentinc/cp-kafka:7.0.0
     depends_on:
       - broker-1
@@ -150,3 +151,4 @@ services:
     entrypoint: [ "bash", "/scripts/kafka-topic-init.sh" ]
     networks:
       - task-tracker-net
+    restart: no
