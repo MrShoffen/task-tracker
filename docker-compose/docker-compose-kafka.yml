@@ -9,9 +9,9 @@ services:
     env_file:
       - ./kafka.env
     depends_on:
-      - broker-1
-      - broker-2
-      - broker-3
+      kafka-init:
+        condition: service_healthy
+
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 10s
@@ -152,3 +152,8 @@ services:
     networks:
       - task-tracker-net
     restart: no
+    healthcheck:
+      test: [ "CMD", "bash", "-c", "[ -f /kafka-init-complete ]" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
