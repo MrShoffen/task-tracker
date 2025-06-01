@@ -3,15 +3,13 @@
 # Настройки
 KAFKA_BROKER="broker-1:19092"
 TOPICS=("task-events" "another-topic")
+PARTITIONS=12
+REPLICATION_FACTOR=3
 RETENTION_MS=120000
 
 # Полные пути к утилитам в Confluent образе
 KAFKA_TOPICS="/usr/bin/kafka-topics"
-CUB="/usr/bin/cub"
 
-# Ожидание доступности Kafka
-echo "Waiting for Kafka..."
-$CUB kafka-ready -b $KAFKA_BROKER 1 60
 
 # Создание топиков
 for topic in "${TOPICS[@]}"; do
@@ -20,6 +18,8 @@ for topic in "${TOPICS[@]}"; do
     --create \
     --if-not-exists \
     --topic $topic \
+    --partitions $PARTITIONS \
+    --replication-factor $REPLICATION_FACTOR \
     --config retention.ms=$RETENTION_MS \
     --config cleanup.policy=delete
 done
