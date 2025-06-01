@@ -86,7 +86,7 @@ services:
     volumes:
       - ./kafka/kafka-topic-init.sh:/scripts/kafka-topic-init.sh
     healthcheck:
-      test: [ "bash", "-c", "cub kafka-ready -b broker-1:19092 1 20 && /scripts/kafka-topic-init.sh" ]
+      test: [ "CMD", "bash", "-c", "cub kafka-ready -b broker-1:19092 1 20 && /scripts/kafka-topic-init.sh" ]
       interval: 10s
       timeout: 5s
       retries: 5
