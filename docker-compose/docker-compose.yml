@@ -441,6 +441,51 @@ services:
       kafka-ui:
         condition: service_started
 
+  task-history-service-1:
+    container_name: task-history-service-1
+    image: mrshoffen/task-tracker-task-history:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      kafka-ui:
+        condition: service_started
+      mongo-history:
+        condition: service_started
+
+  task-history-service-2:
+    container_name: task-history-service-2
+    image: mrshoffen/task-tracker-task-history:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      kafka-ui:
+        condition: service_started
+      mongo-history:
+        condition: service_started
+
+  task-history-service-3:
+    container_name: task-history-service-3
+    image: mrshoffen/task-tracker-task-history:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      kafka-ui:
+        condition: service_started
+      mongo-history:
+        condition: service_started
+
   authentication-service-2:
     container_name: authentication-service-2
     image: mrshoffen/task-tracker-authentication-service:latest

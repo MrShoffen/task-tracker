@@ -96,3 +96,11 @@ scrape_configs:
           - 'authentication-service-1:8080'
           - 'authentication-service-2:8080'
           - 'authentication-service-3:8080'
+
+  - job_name: 'history-services'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'task-history-service-3-1:8080'
+          - 'task-history-service-3-2:8080'
+          - 'task-history-service-3-3:8080'

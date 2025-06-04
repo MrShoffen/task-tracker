@@ -81,6 +81,14 @@ services:
     environment:
       POSTGRES_DB: postgres_comments
 
+  mongo-history:
+    container_name: mongo_history_db
+    image: mongo:latest
+    networks:
+      - task-tracker-net
+    env_file:
+      - ./vars.env
+
   redis:
     container_name: redis_task
     image: redis:7.4
