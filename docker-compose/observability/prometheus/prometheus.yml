@@ -101,6 +101,6 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets:
-          - 'task-history-service-3-1:8080'
-          - 'task-history-service-3-2:8080'
-          - 'task-history-service-3-3:8080'
+          - 'task-history-service-3:8080'
+          - 'task-history-service-3:8080'
+          - 'task-history-service-3:8080'
